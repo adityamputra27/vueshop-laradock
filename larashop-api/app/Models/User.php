@@ -18,9 +18,8 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'name', 'email', 'password', 'username', 'roles',
+        'address', 'city_id', 'province_id', 'phone', 'avatar', 'status'
     ];
 
     /**
@@ -42,4 +41,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function generateToken()
+    {
+        $this->api_token = str_shuffle(60);
+        $this->save();
+        return $this->api_token;
+    }
 }
